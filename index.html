@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For My Bibouu 💗</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(
+                135deg,
+                #ffd6e7 0%,
+                #fff0f6 20%,
+                #fff7c7 40%,
+                #dff8ff 65%,
+                #ead8ff 100%
+            );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 720px;
+            padding: 50px 25px 220px;
+            position: relative;
+            z-index: 5;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff4f87;
+            margin-bottom: 15px;
+            animation: floatTitle 3s infinite ease-in-out;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            color: #75546b;
+            margin-bottom: 30px;
+        }
+
+        #loveButton {
+            border: none;
+            background: linear-gradient(135deg, #ff5f91, #ff87ad, #ffb38a);
+            color: white;
+            padding: 16px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 95, 145, 0.35);
+            transition: 0.3s;
+        }
+
+        #loveButton:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 35px rgba(255, 95, 145, 0.5);
+        }
+
+        #message {
+            opacity: 0;
+            transform: translateY(30px);
+            max-height: 0;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            margin-top: 30px;
+            border-radius: 25px;
+            padding: 0 30px;
+            color: #5b4052;
+            line-height: 1.85;
+            font-size: 1.1rem;
+            box-shadow: 0 15px 40px rgba(130, 70, 100, 0.15);
+            transition: opacity 1s, transform 1s, max-height 1.5s, padding 1s;
+        }
+
+        #message.show {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 1300px;
+            padding: 30px;
+        }
+
+        #message h2 {
+            color: #ff4f87;
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        .signature {
+            margin-top: 22px;
+            font-weight: bold;
+            color: #ff4f87;
+            font-size: 1.3rem;
+        }
+
+        .flower {
+            position: fixed;
+            font-size: 35px;
+            opacity: 0.85;
+            animation: flowerFloat 8s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        .star {
+            position: fixed;
+            font-size: 22px;
+            opacity: 0.8;
+            animation: twinkle 3s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -40px;
+            font-size: 25px;
+            animation: rise 6s linear forwards;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .ground {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 130px;
+            background: linear-gradient(
+                to top,
+                rgba(255, 204, 224, 0.85),
+                rgba(255,255,255,0)
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* ===== CAT SYSTEM ===== */
+
+        .cat-scene {
+            position: fixed;
+            bottom: 8px;
+            width: 220px;
+            height: 190px;
+            z-index: 4;
+            transform-origin: bottom center;
+        }
+
+        .scene-left {
+            left: 25px;
+            transform: scale(0.9);
+        }
+
+        .scene-center {
+            left: 50%;
+            transform: translateX(-50%) scale(1);
+        }
+
+        .scene-right {
+            right: 25px;
+            transform: scale(0.92);
+        }
+
+        .cat {
+            --fur1: #d79c68;
+            --fur2: #c9824e;
+            --earOuter: #db9b64;
+            --earInner: #f5b3b9;
+            --belly: rgba(255, 224, 196, 0.8);
+            --paw: #cb8755;
+            --tail: #ce8957;
+            --muzzle: rgba(255,255,255,0.18);
+
+            position: absolute;
+            bottom: 18px;
+            left: 25px;
+            width: 170px;
+            height: 145px;
+        }
+
+        /* BLACK CAT */
+        .cat.black {
+            --fur1: #2b2b2b;
+            --fur2: #0f0f0f;
+            --earOuter: #1e1e1e;
+            --earInner: #f2a7b9;
+            --belly: rgba(70, 70, 70, 0.75);
+            --paw: #1c1c1c;
+            --tail: #111111;
+            --muzzle: rgba(255,255,255,0.08);
+        }
+
+        /* BLACK & WHITE CAT */
+        .cat.blackwhite {
+            --fur1: #2c2c2c;
+            --fur2: #111111;
+            --earOuter: #1f1f1f;
+            --earInner: #f7c6d1;
+            --belly: rgba(255,255,255,0.95);
+            --paw: #f4f4f4;
+            --tail: #171717;
+            --muzzle: rgba(255,255,255,0.92);
+        }
+
+        /* GREY & WHITE CAT */
+        .cat.greywhite {
+            --fur1: #b6bcc7;
+            --fur2: #8f98a6;
+            --earOuter: #9da5b2;
+            --earInner: #ffd8e1;
+            --belly: rgba(255,255,255,0.96);
+            --paw: #f3f3f3;
+            --tail: #8f98a6;
+            --muzzle: rgba(255,255,255,0.95);
+        }
+
+        .body {
+            position: absolute;
+            bottom: 0;
+            left: 45px;
+            width: 105px;
+            height: 95px;
+            background: linear-gradient(135deg, var(--fur1), var(--fur2));
+            border-radius: 55% 55% 42% 42%;
+            box-shadow: inset -10px -8px 0 rgba(0,0,0,0.05);
+        }
+
+        .belly {
+            position: absolute;
+            bottom: 5px;
+            left: 65px;
+            width: 55px;
+            height: 65px;
+            background: var(--belly);
+            border-radius: 50%;
+        }
+
+        .head {
+            position: absolute;
+            top: 5px;
+            left: 35px;
+            width: 100px;
+            height: 88px;
+            background: linear-gradient(135deg, var(--fur1), var(--fur2));
+            border-radius: 48% 48% 45% 45%;
+            box-shadow: inset -8px -6px 0 rgba(0,0,0,0.04);
+            overflow: visible;
+        }
+
+        .muzzle {
+            position: absolute;
+            left: 26px;
+            top: 46px;
+            width: 48px;
+            height: 24px;
+            background: var(--muzzle);
+            border-radius: 50%;
+        }
+
+        .ear {
+            position: absolute;
+            top: -21px;
+            width: 36px;
+            height: 42px;
+            background: var(--earOuter);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .ear::after {
+            content: "";
+            position: absolute;
+            left: 9px;
+            top: 11px;
+            width: 18px;
+            height: 23px;
+            background: var(--earInner);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .ear-left {
+            left: 7px;
+            transform: rotate(-16deg);
+            transform-origin: bottom center;
+            animation: earLeftMove 4s infinite;
+        }
+
+        .ear-right {
+            right: 7px;
+            transform: rotate(16deg);
+            transform-origin: bottom center;
+            animation: earRightMove 5s infinite;
+        }
+
+        .eye {
+            position: absolute;
+            top: 34px;
+            width: 14px;
+            height: 17px;
+            background: #111;
+            border-radius: 50%;
+            animation: blink 4.5s infinite;
+            z-index: 3;
+        }
+
+        .eye::after {
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+        }
+
+        .eye-left { left: 25px; }
+        .eye-right { right: 25px; }
+
+        .nose {
+            position: absolute;
+            top: 53px;
+            left: 44px;
+            width: 13px;
+            height: 10px;
+            background: #ef8f9f;
+            border-radius: 50% 50% 60% 60%;
+            z-index: 4;
+        }
+
+        .mouth-left,
+        .mouth-right {
+            position: absolute;
+            top: 62px;
+            width: 16px;
+            height: 10px;
+            border-bottom: 2px solid #6b4c4c;
+            z-index: 4;
+        }
+
+        .mouth-left {
+            left: 36px;
+            border-radius: 0 0 100% 0;
+            transform: rotate(8deg);
+        }
+
+        .mouth-right {
+            right: 36px;
+            border-radius: 0 0 0 100%;
+            transform: rotate(-8deg);
+        }
+
+        .whisker {
+            position: absolute;
+            width: 38px;
+            height: 2px;
+            background: #68575b;
+            border-radius: 3px;
+            z-index: 4;
+        }
+
+        .whisker-1 {
+            top: 55px;
+            left: -25px;
+            transform: rotate(7deg);
+        }
+
+        .whisker-2 {
+            top: 64px;
+            left: -26px;
+            transform: rotate(-5deg);
+        }
+
+        .whisker-3 {
+            top: 55px;
+            right: -25px;
+            transform: rotate(-7deg);
+        }
+
+        .whisker-4 {
+            top: 64px;
+            right: -26px;
+            transform: rotate(5deg);
+        }
+
+        .paw {
+            position: absolute;
+            bottom: -5px;
+            width: 39px;
+            height: 28px;
+            background: var(--paw);
+            border-radius: 50%;
+        }
+
+        .paw-left {
+            left: 47px;
+            animation: pawTap 2.8s infinite;
+        }
+
+        .paw-right {
+            left: 105px;
+        }
+
+        .tail {
+            position: absolute;
+            bottom: 24px;
+            left: 125px;
+            width: 100px;
+            height: 45px;
+            border: 19px solid var(--tail);
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 100px 0 0;
+            transform-origin: left bottom;
+            animation: tailWag 2.4s infinite ease-in-out;
+        }
+
+        .little-heart {
+            position: absolute;
+            top: 18px;
+            right: 10px;
+            font-size: 24px;
+            opacity: 0;
+            animation: catHeart 4s infinite;
+        }
+
+        .toy {
+            position: absolute;
+            bottom: 18px;
+            right: 8px;
+            font-size: 42px;
+        }
+
+        .toy-ball {
+            animation: ballMove 2.8s infinite ease-in-out;
+        }
+
+        .toy-butterfly {
+            animation: butterflyMove 3s infinite ease-in-out;
+        }
+
+        .toy-flower {
+            animation: flowerToyMove 2.4s infinite ease-in-out;
+        }
+
+        @keyframes blink {
+            0%, 43%, 47%, 100% { transform: scaleY(1); }
+            45% { transform: scaleY(0.08); }
+        }
+
+        @keyframes tailWag {
+            0%, 100% { transform: rotate(-12deg); }
+            50% { transform: rotate(18deg); }
+        }
+
+        @keyframes earLeftMove {
+            0%, 88%, 100% { transform: rotate(-16deg); }
+            92% { transform: rotate(-3deg); }
+        }
+
+        @keyframes earRightMove {
+            0%, 84%, 100% { transform: rotate(16deg); }
+            89% { transform: rotate(5deg); }
+        }
+
+        @keyframes pawTap {
+            0%, 60%, 100% { transform: translateY(0) rotate(0deg); }
+            70% { transform: translateY(-10px) rotate(-8deg); }
+            80% { transform: translateX(8px) translateY(-4px); }
+        }
+
+        @keyframes ballMove {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(-32px) rotate(-160deg); }
+        }
+
+        @keyframes butterflyMove {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-15px) translateX(-10px) rotate(-10deg); }
+            50% { transform: translateY(-5px) translateX(-25px) rotate(10deg); }
+            75% { transform: translateY(-18px) translateX(-8px) rotate(-8deg); }
+        }
+
+        @keyframes flowerToyMove {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            50% { transform: rotate(12deg) translateY(-8px); }
+        }
+
+        @keyframes catHeart {
+            0%, 60%, 100% {
+                opacity: 0;
+                transform: translateY(8px) scale(0.7);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            85% {
+                opacity: 0;
+                transform: translateY(-20px) scale(1.2);
+            }
+        }
+
+        @keyframes flowerFloat {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.25); opacity: 1; }
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) scale(1.5) rotate(30deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatTitle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-7px); }
+        }
+
+        @media (max-width: 900px) {
+            .scene-left {
+                left: 0;
+                transform: scale(0.72);
+            }
+
+            .scene-center {
+                transform: translateX(-50%) scale(0.82);
+            }
+
+            .scene-right {
+                right: 0;
+                transform: scale(0.72);
+            }
+
+            .container {
+                padding-bottom: 210px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            #message {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding-bottom: 270px;
+            }
+
+            .scene-left {
+                left: -18px;
+                bottom: 0;
+                transform: scale(0.62);
+            }
+
+            .scene-center {
+                bottom: 0;
+                transform: translateX(-50%) scale(0.68);
+            }
+
+            .scene-right {
+                right: -18px;
+                bottom: 0;
+                transform: scale(0.62);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DECOR -->
+    <div class="flower" style="top:7%; left:5%;">🌷</div>
+    <div class="flower" style="top:15%; right:8%;">🌸</div>
+    <div class="flower" style="top:38%; left:2%;">🌼</div>
+    <div class="flower" style="top:53%; right:4%;">🌹</div>
+    <div class="flower" style="bottom:16%; left:4%;">🌺</div>
+    <div class="flower" style="bottom:22%; right:10%;">🌷</div>
+
+    <div class="star" style="top:10%; left:25%;">✨</div>
+    <div class="star" style="top:18%; right:25%;">⭐</div>
+    <div class="star" style="top:30%; left:18%;">✨</div>
+    <div class="star" style="bottom:28%; right:22%;">⭐</div>
+
+    <div class="ground"></div>
+
+    <!-- LEFT CAT = BLACK -->
+    <div class="cat-scene scene-left">
+        <div class="little-heart">🖤</div>
+        <div class="cat black">
+            <div class="tail"></div>
+            <div class="body"></div>
+            <div class="belly"></div>
+            <div class="head">
+                <div class="muzzle"></div>
+                <div class="ear ear-left"></div>
+                <div class="ear ear-right"></div>
+                <div class="eye eye-left"></div>
+                <div class="eye eye-right"></div>
+                <div class="nose"></div>
+                <div class="mouth-left"></div>
+                <div class="mouth-right"></div>
+                <div class="whisker whisker-1"></div>
+                <div class="whisker whisker-2"></div>
+                <div class="whisker whisker-3"></div>
+                <div class="whisker whisker-4"></div>
+            </div>
+            <div class="paw paw-left"></div>
+            <div class="paw paw-right"></div>
+        </div>
+        <div class="toy toy-butterfly">🦋</div>
+    </div>
+
+    <!-- CENTER CAT = BLACK & WHITE -->
+    <div class="cat-scene scene-center">
+        <div class="little-heart">🤍</div>
+        <div class="cat blackwhite">
+            <div class="tail"></div>
+            <div class="body"></div>
+            <div class="belly"></div>
+            <div class="head">
+                <div class="muzzle"></div>
+                <div class="ear ear-left"></div>
+                <div class="ear ear-right"></div>
+                <div class="eye eye-left"></div>
+                <div class="eye eye-right"></div>
+                <div class="nose"></div>
+                <div class="mouth-left"></div>
+                <div class="mouth-right"></div>
+                <div class="whisker whisker-1"></div>
+                <div class="whisker whisker-2"></div>
+                <div class="whisker whisker-3"></div>
+                <div class="whisker whisker-4"></div>
+            </div>
+            <div class="paw paw-left"></div>
+            <div class="paw paw-right"></div>
+        </div>
+        <div class="toy toy-ball">🧶</div>
+    </div>
+
+    <!-- RIGHT CAT = GREY & WHITE -->
+    <div class="cat-scene scene-right">
+        <div class="little-heart">💗</div>
+        <div class="cat greywhite">
+            <div class="tail"></div>
+            <div class="body"></div>
+            <div class="belly"></div>
+            <div class="head">
+                <div class="muzzle"></div>
+                <div class="ear ear-left"></div>
+                <div class="ear ear-right"></div>
+                <div class="eye eye-left"></div>
+                <div class="eye eye-right"></div>
+                <div class="nose"></div>
+                <div class="mouth-left"></div>
+                <div class="mouth-right"></div>
+                <div class="whisker whisker-1"></div>
+                <div class="whisker whisker-2"></div>
+                <div class="whisker whisker-3"></div>
+                <div class="whisker whisker-4"></div>
+            </div>
+            <div class="paw paw-left"></div>
+            <div class="paw paw-right"></div>
+        </div>
+        <div class="toy toy-flower">🌸</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <h1>Hi Bibouu 💗</h1>
+
+        <p class="intro">
+            A little something made just for you.
+        </p>
+
+        <button id="loveButton">
+            Open your surprise 🌸
+        </button>
+
+        <div id="message">
+            <h2>To my Bibouu 💕</h2>
+
+            <p>
+                I just wanted to make this little place for you
+                to remind you how incredibly proud I am of you.
+            </p>
+
+            <br>
+
+            <p>
+                I see how much you do, how much you try,
+                and how much you keep going even when things
+                aren't always easy.
+                I hope you know that I notice it.
+            </p>
+
+            <br>
+
+            <p>
+                I'm proud of the person you are,
+                proud of everything you're accomplishing,
+                and proud of every little step you take
+                toward becoming the person you want to be.
+            </p>
+
+            <br>
+
+            <p>
+                More than anything,
+                I hope you never forget how loved you are.
+                You mean more to me than I can properly put
+                into words.
+            </p>
+
+            <br>
+
+            <p>
+                Being able to love you,
+                support you,
+                laugh with you,
+                and be there for you
+                means so much to me.
+            </p>
+
+            <br>
+
+            <p>
+                Keep being you, Bibouu.
+                I'll always be cheering for you.
+                🌷🐱💗
+            </p>
+
+            <div class="signature">
+                I love you, Bibouu. ❤️
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const button = document.getElementById("loveButton");
+        const message = document.getElementById("message");
+
+        button.addEventListener("click", function () {
+            message.classList.add("show");
+            button.innerHTML = "For you, Bibouu ❤️";
+            createHeartExplosion();
+        });
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+
+            const hearts = ["💗", "💕", "💖", "💓", "🌸", "🌷", "✨"];
+
+            heart.innerHTML =
+                hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (Math.random() * 20 + 18) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 1000);
+
+        function createHeartExplosion() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
